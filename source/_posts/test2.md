@@ -46,7 +46,7 @@ This package.json file will be a hub of information about our project. It will t
 
 _note: a "script" is something that just runs in the command line, and is purely for convenience. For example, if you type "npm test" in the command line right now, it will go into this file, find "test" in the scripts section, and just run "echo \"Error: no test specified\" && exit 1" in the command line. So there is zero difference between typing "npm test" and "echo \"Error: no test specified\" && exit 1", you're just saving keystrokes. Maybe I am the only one who did not figure this out right away...but felt it was worth clarifying._
 
-#### Webpack
+#### Installing our first dependencies
 
 To see package.json in action, let's install a build tool called [Webpack](http://webpack.github.io/). 
 
@@ -82,8 +82,16 @@ A couple of key things have now happened.
 Now install react (and react-dom, which is needed for some stuff we'll cover later)
 
 ```bash
-npm install -save react react-dom
+npm install -save react react-dom # shorthand for this would be: npm i -S react react-dom 
 ```
+
+#### Structuring your project directory 
+
+As you learn about react, the first thing that stands out (at least to a novice) is that you'll be making a lot of "components". So if you've been throwing all of your javascript code into one file, that's not happening here. As a result, you need to have a way to have all of the separate js files you write "bundle" into one javascript file at the end with all the proper libraries and stuff included. This is what webpack does for you...and webpack is concerned with how you have your project directory setup. At its core, webpack is going to be looking for an "entry" point (as in "what files am I bundling for you?") and an "output" point ("where do you want me to dump this one massive file I've made for you?").
+
+
+
+
 
 
 
