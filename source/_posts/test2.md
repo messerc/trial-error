@@ -1,18 +1,14 @@
 ---
-title: React SPA from scratch (2 / 6)
+title: React SPA from scratch (2 of 6) 
 date: 2017-01-20 18:31:51
 tags:
 ---
 
-### Part 2: Starting...with stuff that isn't React
-
-#### It all starts with one file - package.json 
+### Part 2: Starting...with stuff that isn't javascript 
 
 _note: If you're already comfortable with npm, webpack, and project structuring, you're good to skip to the bottom 'summary' section and run that code_
 
-If you're like me, you value doing examples on codepen and jsfiddle only to a certain degree. I was always thinking "this is cool...but I still don't really get how this all comes together start to finish for a real page".
-
-So let's start from a blank directory. Open up your terminal and input the following:
+Let's start from a blank directory. Open up your terminal and input the following:
 
 __note: If you don't have nodeJS, that's the very first thing [we'll be getting](https://nodejs.org/en/). All we're getting nodeJS for is for its ["npm"](https://docs.npmjs.com/getting-started/what-is-npm)  - node package manager.__
 
@@ -23,9 +19,7 @@ npm init -y  # 'initializes' a package.json file for you in the directory and th
 ```
 <!-- more -->
 
-If you've never worked with a package.json file before, I promise it's very gentle and won't hurt you with scary syntax. And the best part is that *not much magic is happening*, you will quickly get a handle on this.  
-
-So if you open up that directory, all you'll see for now is that one package.json file, and here are the contents.
+If you've never worked with a package.json file before, I promise it's very gentle and won't hurt you with scary syntax. If you open up the directory, all you'll see for now is that one package.json file, seen below. 
 
 ```json
 {
@@ -44,7 +38,7 @@ So if you open up that directory, all you'll see for now is that one package.jso
 
 This package.json file will be a hub of information about our project. It will tell anybody, including yourself, what "dependencies" we have (like React), and include some simple "scripts" for us to run our project. It helps keep track of everything, and it does so automatically. 
 
-_note: a "script" is something that just runs in the command line, and is purely for convenience. For example, if you type "npm test" in the command line right now, it will go into this file, find "test" in the scripts section, and just run "echo \"Error: no test specified\" && exit 1" in the command line. So there is zero difference between typing "npm test" and "echo \"Error: no test specified\" && exit 1", you're just saving keystrokes. Maybe I am the only one who did not figure this out right away...but felt it was worth clarifying._
+_note: a "script" is something that just runs in the command line, and is essentially for convenience / standardization. For example, if you type "npm test" in the command line right now, it will go into this file, find "test" in the scripts section, and just run "echo \"Error: no test specified\" && exit 1" in the command line. So there is zero difference between typing "npm test" and "echo \"Error: no test specified\" && exit 1", you're just saving keystrokes. Maybe I am the only one who did not figure this out right away...but felt it was worth clarifying._
 
 #### Installing our first dependencies
 
@@ -58,7 +52,7 @@ npm install -save webpack # saying: "hey node package manager, install webpack a
 
 A couple of key things have now happened. 
 
-* In your package.json file, you will see that Webpack now makes an appearance as a dependency. 
+* In your package.json file, you will see that Webpack has been added as a dependency. 
 
 ```json
 {
@@ -87,7 +81,46 @@ npm install -save react react-dom # shorthand for this would be: npm i -S react 
 
 #### Structuring your project directory 
 
-As you learn about react, the first thing that stands out (at least to a novice) is that you'll be making a lot of "components". So if you've been throwing all of your javascript code into one file, that's not happening here. As a result, you need to have a way to have all of the separate js files you write "bundle" into one javascript file at the end with all the proper libraries and stuff included. This is what webpack does for you...and webpack is concerned with how you have your project directory setup. At its core, webpack is going to be looking for an "entry" point (as in "what files am I bundling for you?") and an "output" point ("where do you want me to dump this one massive file I've made for you?").
+As you learn about react, one thing you'll notice is that you'll be making a lot of "components". So if you've been throwing all of your javascript code into one file, that will change here. As a result, you need to have a way to have all of the separate js files you write "bundle" into one javascript file at the end with all libraries included. This is what webpack does for you...and webpack is concerned with how you have your project directory setup to a certain degree. At its core, webpack is going to be looking for an "entry" point (as in "what files am I bundling for you?") and an "output" point ("where do you want me to dump this one massive file I've made for you?").
+
+With this in mind, let's start making the project structure. 
+
+```bash
+mkdir dist # this directory is going to hold what we want to 'distribute' out to the world, and will contain our "output" point for webpack
+mkdir src # this will be our source folder, it will hold all of the files we'll be actively working on 
+mkdir src/js # this will contain all of our js files, and will contain webpack's "entry" point
+```
+
+So now your directory should look like this. 
+
+```
+twitchreact (main directory)
+│   package.json
+│      
+│
+└───src (folder)
+│   │   
+│   │   
+│   │
+│   └───js (sub-folder) <-- this is where we'll be adding most of our work 
+│       │   
+│       │  
+│       │   ...
+│   
+└───dist (folder)  <-- this is where we'll have all the "final" files ready to be consumed by the browser 
+│ 
+│          
+│        
+│       
+│   
+└───node_modules (folder)
+    │   all your dependency stuff ... (just webpack and react stuff for now)
+
+```
+
+TO ADD NEXT: getting dist setup with files 
+THEN - adding first JS file to source (client.js) 
+THEN - summary section - summary code - and onto part 3 
 
 
 
