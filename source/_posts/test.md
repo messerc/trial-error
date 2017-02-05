@@ -28,7 +28,7 @@ I put together a simple page called [twitch.show](http://www.twitch.show) to hel
 
 In no particular order 
 
-* Useful command line stuff and pushing changes to github 
+* Useful command line stuff
 * Working with an API - from obtaining your token ID to rendering data on a page
 * React 
 * React Router

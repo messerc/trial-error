@@ -6,11 +6,12 @@ tags:
 
 ### Part 2: Starting...with stuff that isn't javascript 
 
-_note: If you're already comfortable with npm, webpack, and project structuring, you're good to skip to the bottom 'summary' section and run that code_
+_initial note: If you already know what npm and webpack are, and familiar with project structuring, you're good to skip to the bottom 'summary' section and run that code. If you've never opened up the terminal, I hope this is gentle enough._
 
-Let's start from a blank directory. Open up your terminal and input the following:
 
-__note: If you don't have nodeJS, that's the very first thing [we'll be getting](https://nodejs.org/en/). All we're getting nodeJS for is for its ["npm"](https://docs.npmjs.com/getting-started/what-is-npm)  - node package manager.__
+If you don't have nodeJS, that's the very first thing [we'll be getting](https://nodejs.org/en/). All we're getting nodeJS for is for its ["npm"](https://docs.npmjs.com/getting-started/what-is-npm) - node package manager. 
+
+Now let's start from a blank directory. Open up your terminal, navigate your way to any reasonable folder, and input the following:
 
 ```bash
 mkdir twitchreact   # makes the directory 
@@ -19,7 +20,7 @@ npm init -y  # 'initializes' a package.json file for you in the directory and th
 ```
 <!-- more -->
 
-If you've never worked with a package.json file before, I promise it's very gentle and won't hurt you with scary syntax. If you open up the directory, all you'll see for now is that one package.json file, seen below. 
+If you've never worked with a package.json file before, I promise it won't hurt you with scary syntax. If you open up the directory, all you'll see for now is that one package.json file, seen below. 
 
 ```json
 {
@@ -36,11 +37,11 @@ If you've never worked with a package.json file before, I promise it's very gent
 }
 ```
 
-This package.json file will be a hub of information about our project. It will tell anybody, including yourself, what "dependencies" we have (like React), and include some simple "scripts" for us to run our project. It helps keep track of everything, and it does so automatically. 
+This package.json file will be a hub of information about our project. It will tell anybody what "dependencies" we have (like React), and include some simple "scripts" for us to run our project. It helps keep track of everything, and it does so automatically. 
 
-_note: a "script" is something that just runs in the command line, and is essentially for convenience / standardization. For example, if you type "npm test" in the command line right now, it will go into this file, find "test" in the scripts section, and just run "echo \"Error: no test specified\" && exit 1" in the command line. So there is zero difference between typing "npm test" and "echo \"Error: no test specified\" && exit 1", you're just saving keystrokes. Maybe I am the only one who did not figure this out right away...but felt it was worth clarifying._
+_note: a "script" is something that just runs in the command line, and is essentially for convenience / standardization. For example, if you type "npm test" in the command line right now, it will go into this file, find "test" in the scripts section, and just run "echo \"Error: no test specified\" && exit 1" in the command line. Another common script is "start" and it typically starts up your application, which only makes sense. Absolutely use these, [read more here.](https://docs.npmjs.com/misc/scripts)_
 
-#### Installing our first dependencies
+### Installing our first dependencies
 
 To see package.json in action, let's install a build tool called [Webpack](http://webpack.github.io/). 
 
@@ -73,15 +74,21 @@ A couple of key things have now happened.
 ```
 * In your project directory, there is now a "node_modules" folder, and it has Webpack and whatever else Webpack needs to do its thing.
 
+Let's also install [Babel](https://babeljs.io/). Babel and its various modules will help Webpack compile our code. 
+
+```bash
+npm i -S babel babel-core babel-loader babel-preset-es2015 babel-preset-react 
+```
+
 Now install react (and react-dom, which is needed for some stuff we'll cover later)
 
 ```bash
 npm install -save react react-dom # shorthand for this would be: npm i -S react react-dom 
 ```
 
-#### Structuring your project directory 
+### Structuring your project directory 
 
-As you learn about react, one thing you'll notice is that you'll be making a lot of "components". So if you've been throwing all of your javascript code into one file, that will change here. As a result, you need to have a way to have all of the separate js files you write "bundle" into one javascript file at the end with all libraries included. This is what webpack does for you...and webpack is concerned with how you have your project directory setup to a certain degree. At its core, webpack is going to be looking for an "entry" point (as in "what files am I bundling for you?") and an "output" point ("where do you want me to dump this one massive file I've made for you?").
+As you learn about react, one thing you'll notice is that you'll be making a lot of "components". So if you've been throwing all of your javascript code into one file, that will change here. As a result, you need to have a way to have all of the separate js files you write "bundle" into one javascript file at the end with all libraries included. This is what webpack does for you...and webpack needs to know how your project directory is setup to a certain degree. At its core, webpack is going to be looking for an "entry" point (as in "what files am I bundling for you?") and an "output" point ("where do you want me to dump this one massive file I've made for you?").
 
 With this in mind, let's start making the project structure. 
 
@@ -117,10 +124,95 @@ twitchreact (main directory)
     │   all your dependency stuff ... (just webpack and react stuff for now)
 
 ```
+### Setting up the 'dist' directory
 
-TO ADD NEXT: getting dist setup with files 
-THEN - adding first JS file to source (client.js) 
-THEN - summary section - summary code - and onto part 3 
+```bash
+touch dist/index.html
+touch dist/twitch.css # this is optional, and there are many opinions on styling react. 
+```
+index.html is simple.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Slate CSS Theme -->
+  <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css" />
+  <link rel="stylesheet" href="twitch.css" />
+  <title>twitch.show</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+
+<script src="https://use.fontawesome.com/470e91b33f.js"></script>
+<script src="bundle.js"></script>
+</body>
+</html>
+```
+
+A very basic html file with the most critical parts being:
+
+a) a div with the id "app" to receive our entire react application.
+b) a script with source "bundle.js" which has yet to be created, but that will be webpack's job later on.
+
+I've also grabbed a simple bootswatch theme to start with.
+
+
+## Summary
+
+We initialized a package.json, started installing some of our dependencies, shaped our basic project structure, and created our index.html file. The next section will dive into getting React working. 
+
+## The code we ran in this section:
+
+### In the terminal
+
+```bash
+mkdir twitchreact   
+cd twitchreact   
+npm init -y  
+
+npm install -save webpack
+npm install -save react react-dom
+
+mkdir dist
+mkdir src
+mkdir src/js 
+
+touch dist/index.html
+touch dist/twitch.css
+```
+### Index.html 
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Slate CSS Theme -->
+  <link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css" />
+  <link rel="stylesheet" href="twitch.css" />
+  <title>twitch.show</title>
+</head>
+<body>
+
+  <div id="app"></div>
+
+
+<script src="https://use.fontawesome.com/470e91b33f.js"></script>
+<script src="bundle.js"></script>
+</body>
+</html>
+```
+
+
+
 
 
 
